@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      min-height: 400px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      color: #333;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-box {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .status-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .status-text {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-success:hover:not(:disabled) {
+      background: #1ea952;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 3px solid #667eea;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #856404;
+    }
+
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #155724;
+    }
+
+    .error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #721c24;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.8;
+      margin-top: 15px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📱 WA Contact Extractor</h1>
+      <p>Extract all your WhatsApp contacts</p>
+    </div>
+
+    <div class="card">
+      <div id="statusBox" class="status-box">
+        <div>
+          <div class="status-icon">🔍</div>
+          <div class="status-text">Ready to extract contacts</div>
+        </div>
+      </div>
+
+      <div id="stats" class="stats hidden">
+        <div class="stat-item">
+          <div class="stat-number" id="totalContacts">0</div>
+          <div class="stat-label">Total Contacts</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="withPhone">0</div>
+          <div class="stat-label">With Phone</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <button id="extractBtn" class="btn-primary">
+        🚀 Extract Contacts
+      </button>
+      
+      <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 6px;">
+        <label style="display: flex; align-items: center; cursor: pointer; font-size: 13px; color: #333;">
+          <input type="checkbox" id="onlySaved" checked style="margin-right: 8px;">
+          <strong>Only saved contacts</strong> (recommended)
+        </label>
+        <div style="font-size: 11px; color: #666; margin: 4px 0 8px 24px;">
+          Extract only contacts saved in your phone
+        </div>
+        
+        <label style="display: flex; align-items: center; cursor: pointer; font-size: 13px; color: #333;">
+          <input type="checkbox" id="includeGroups" style="margin-right: 8px;">
+          Include group chats
+        </label>
+        
+        <label style="display: flex; align-items: center; cursor: pointer; font-size: 13px; color: #333; margin-top: 8px;">
+          <input type="checkbox" id="onlyWithPhone" checked style="margin-right: 8px;">
+          Only contacts with phone numbers
+        </label>
+      </div>
+      
+      <div id="downloadButtons" class="hidden">
+        <button id="downloadBtn" class="btn-success">
+          📥 Download CSV
+        </button>
+        <button id="downloadVcfBtn" class="btn-success" style="margin-top: 8px;">
+          📇 Download VCF (vCard)
+        </button>
+      </div>
+    </div>
+
+    <div id="messageBox"></div>
+
+    <div class="footer">
+      Copyrights Azib Pasha 
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
