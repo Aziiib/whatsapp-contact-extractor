@@ -21,6 +21,7 @@ A Chrome extension that exports your WhatsApp Web contacts with names, phone num
 ## Screenshots
 
 Load the extension, open [WhatsApp Web](https://web.whatsapp.com), then use the popup to extract and download.
+<img width="867" height="1485" alt="image" src="https://github.com/user-attachments/assets/c5911d54-084f-46ce-862f-dee7a8c228dd" />
 
 ---
 
@@ -97,6 +98,9 @@ WhatsApp Web’s UI and storage format can change. If extraction fails, refresh 
 This project is for personal, lawful use (backing up your own contacts). It is not affiliated with WhatsApp or Meta. WhatsApp’s terms of service may restrict automated access; use at your own risk.
 
 ---
+## Screen Shots:
+<img width="840" height="1152" alt="image" src="https://github.com/user-attachments/assets/725ea0c0-2d98-43f9-825d-624c2df53175" />
+
 
 ## License
 
